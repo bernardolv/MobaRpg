@@ -51,9 +51,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\CharacterSpells1.cs" />
+     <Compile Include="Assets\MouseClicker.cs" />
      <Compile Include="Assets\Scripts\CharacterMovement.cs" />
      <None Include="Assets\roguelike-pack\Spritesheet\spritesheetInfo.txt" />
      <None Include="Assets\roguelike-pack\License.txt" />
+ <Reference Include="Facebook.Unity.Settings">
+ <HintPath>/Users/bernardolimon/Desktop/Bedmelt/MobaRpg/MobaRpg/Library/FacebookSDK/Facebook.Unity.Settings.dll</HintPath>
+ </Reference>
  <Reference Include="UnityEngine.UI">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

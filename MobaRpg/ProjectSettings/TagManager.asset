@@ -44,6 +44,9 @@ TagManager:
   - name: Ground Floor
     uniqueID: 3876213555
     locked: 0
+  - name: Environment
+    uniqueID: 2734739509
+    locked: 0
   - name: Player
     uniqueID: 3249548353
     locked: 0

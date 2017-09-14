@@ -13,6 +13,7 @@ public class CharacterMovement : MonoBehaviour {
 		//int animvalue;
 		pos = transform.position;
 		anim = GetComponent<Animator> ();
+		speed = 3;
 		//animvalue = 0;
 	
 	}
@@ -21,21 +22,64 @@ public class CharacterMovement : MonoBehaviour {
 	void Update () {
 		
 		if(Input.GetKey(KeyCode.A) && transform.position == pos) {        // Left
+			if(Input.GetKey(KeyCode.LeftShift)){
+				anim.Play("Playeridleleft");
+			}
+				else{	
 			pos += Vector3.left;
 			anim.Play("Walkingleft");
+			}
 		}
 		if(Input.GetKey(KeyCode.D) && transform.position == pos) {        // Right
-			pos += Vector3.right;
-			anim.Play ("Walkingright");
+			if (Input.GetKey (KeyCode.LeftShift)) {
+				anim.Play ("Playeridleright");
+			}
+			else {	
+				pos += Vector3.right;
+				anim.Play ("Walkingright");
+			}
 		}
 		if(Input.GetKey(KeyCode.W) && transform.position == pos) {        // Up
-			pos += Vector3.up;
-			anim.Play ("Walkingup");
+			if (Input.GetKey (KeyCode.LeftShift)) {
+				anim.Play ("Playeridleup");
+			} 
+			else {	
+				pos += Vector3.up;
+				anim.Play ("Walkingup");
+			}
 		}
 		if(Input.GetKey (KeyCode.S) && transform.position == pos) {        // Down
-			pos += Vector3.down;
-			anim.Play ("Walkingdown");
+			if (Input.GetKey (KeyCode.LeftShift)) {
+				anim.Play ("Playeridledown");
+			} 
+			else {	
+				pos += Vector3.down;
+				anim.Play ("Walkingdown");
+			}
 		} 
+		if(Input.GetKey(KeyCode.Q) && transform.position == pos) {        // Left
+			pos += Vector3.left;
+			pos += Vector3.up;
+			anim.Play("Walkingleft");
+		}
+		if(Input.GetKey(KeyCode.E) && transform.position == pos) {        // Left
+			pos += Vector3.right;
+			pos += Vector3.up;
+			anim.Play("Walkingright");
+		}
+		if(Input.GetKey(KeyCode.Z) && transform.position == pos) {        // Left
+			pos += Vector3.left;
+			pos += Vector3.down;
+			anim.Play("Walkingleft");
+		}
+		if(Input.GetKey(KeyCode.C) && transform.position == pos) {        // Left
+			pos += Vector3.right;
+			pos += Vector3.down;
+			anim.Play("Walkingright");
+		}
+		//if(Input.GetKey(KeyCode.D) && Input.GetKey(KeyCode.LeftShift) && transform.position == pos) {        // LookRight
+		//	anim.Play("Playeridleright");
+		//}
 			
 		transform.position = Vector3.MoveTowards(transform.position, pos, Time.deltaTime * speed); 
 
