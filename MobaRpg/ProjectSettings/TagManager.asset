@@ -3,7 +3,10 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Enemy
+  - Envirionment
+  - Current Target
   layers:
   - Default
   - TransparentFX
@@ -46,6 +49,9 @@ TagManager:
     locked: 0
   - name: Environment
     uniqueID: 2734739509
+    locked: 0
+  - name: NPCS
+    uniqueID: 2785787595
     locked: 0
   - name: Player
     uniqueID: 3249548353

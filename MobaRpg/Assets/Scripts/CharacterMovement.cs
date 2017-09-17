@@ -7,13 +7,14 @@ public class CharacterMovement : MonoBehaviour {
 	Vector3 pos;
 	public float speed;
 	private Animator anim;
-
+	public GameObject selectedenemy;	
+	public EnemyHealth enemyhealthscript;
 	// Use this for initialization
 	void Start () {
 		//int animvalue;
 		pos = transform.position;
 		anim = GetComponent<Animator> ();
-		speed = 3;
+		speed = 4;
 		//animvalue = 0;
 	
 	}
@@ -77,12 +78,10 @@ public class CharacterMovement : MonoBehaviour {
 			pos += Vector3.down;
 			anim.Play("Walkingright");
 		}
-		//if(Input.GetKey(KeyCode.D) && Input.GetKey(KeyCode.LeftShift) && transform.position == pos) {        // LookRight
-		//	anim.Play("Playeridleright");
-		//}
 			
 		transform.position = Vector3.MoveTowards(transform.position, pos, Time.deltaTime * speed); 
 
+		//Animation Transitions
 		if(anim.GetCurrentAnimatorStateInfo(0).IsName("Walkingright") && transform.position == pos)
 		{
 			anim.Play ("Playeridleright");
@@ -98,6 +97,25 @@ public class CharacterMovement : MonoBehaviour {
 		if(anim.GetCurrentAnimatorStateInfo(0).IsName("Walkingdown") && transform.position == pos)
 		{
 			anim.Play ("Playeridledown");
+		}
+		//ATTACK SELECTION
+		if (Input.GetMouseButtonDown (1)) {
+			RayCaster ();
+			//BasicAttack ();
+		}
+		
+	}
+	void RayCaster (){
+		Debug.Log ("Pressed right click.");
+		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+		RaycastHit hit;
+		if(Physics.Raycast(ray, out hit,10)){
+			if (hit.transform.tag == "Enemy") {
+				selectedenemy = hit.transform.gameObject;
+				Debug.Log ("You got an enemy biaaaatch and his name is " + selectedenemy.ToString()	);
+				enemyhealthscript = selectedenemy.transform.gameObject.transform.GetComponentInChildren<EnemyHealth> ();
+				enemyhealthscript.ReceiveDamage (1);
+			}
 		}
 	}
 }
