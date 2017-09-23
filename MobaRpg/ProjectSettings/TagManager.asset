@@ -7,6 +7,8 @@ TagManager:
   - Enemy
   - Envirionment
   - Current Target
+  - Fire
+  - TotemHeal
   layers:
   - Default
   - TransparentFX

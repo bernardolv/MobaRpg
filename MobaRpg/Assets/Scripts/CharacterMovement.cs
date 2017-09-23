@@ -9,27 +9,127 @@ public class CharacterMovement : MonoBehaviour {
 	private Animator anim;
 	public GameObject selectedenemy;	
 	public EnemyHealth enemyhealthscript;
-	// Use this for initialization
+	public CharacterSpells1 spells;
+	public float wingsTime;
+	public GameObject Player;
+	public GameObject dummyObject;
+	Vector3 rot;
+	public bool ishorizontal;
+	public  float AutoAttackCooldown;
+	public float AutoAttackCurTime;
+	public bool aggro;
+	public SlimeAI enemyAI;
+
 	void Start () {
 		//int animvalue;
 		pos = transform.position;
+		//rot = transform.rotation.eulerAngles;
 		anim = GetComponent<Animator> ();
 		speed = 4;
+		spells = GetComponent<CharacterSpells1> ();
 		//animvalue = 0;
+		Player = this.gameObject;
+		dummyObject = new GameObject("Dummy Object");
+		rot = dummyObject.transform.rotation.eulerAngles;
+		dummyObject.transform.parent = Player.transform;
+
 	
 	}
-	
-	// Update is called once per frame
 	void Update () {
-		
+		Movement ();
+		//ATTACK SELECTION
+		if (Input.GetMouseButtonDown (1)) {
+			RayCaster ();
+		}
+		if (selectedenemy != null) {
+			if (AutoAttackCurTime < AutoAttackCooldown) {
+				AutoAttackCurTime += Time.deltaTime;
+			} 
+			else {
+				enemyhealthscript.ReceiveDamage (10);
+				AutoAttackCurTime = 0;
+			}
+		}
+		spellhotkeys ();
+	}
+	void RayCaster (){
+		Debug.Log (Vector3.down);
+		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+		RaycastHit hit;
+		if(Physics.Raycast(ray, out hit,10)){
+			if (hit.transform.tag == "Enemy") {
+				selectedenemy = hit.transform.gameObject;
+				Debug.Log ("You got an enemy biaaaatch and his name is " + selectedenemy.ToString()	);
+				enemyhealthscript = selectedenemy.transform.gameObject.transform.GetComponentInChildren<EnemyHealth> ();
+				enemyAI = selectedenemy.transform.gameObject.transform.GetComponentInChildren<SlimeAI> ();
+				GameObject frame = (GameObject)Instantiate(Resources.Load("Selected_Frame"));
+				frame.transform.position = selectedenemy.transform.position;
+				frame.transform.parent = selectedenemy.transform;
+				aggro = true;
+				enemyAI.aggro = true;
+				enemyAI.target = this.gameObject;
+
+			}
+		}
+	}	
+	void FireWings (){
+		for (int y = 1; y < 4; y++) {
+			if ((anim.GetCurrentAnimatorStateInfo (0).IsName ("Playeridleright") || anim.GetCurrentAnimatorStateInfo (0).IsName ("Playeridleleft")) && transform.position == pos) {
+				//Spawning vertical
+				GameObject cubeup = (GameObject)Instantiate(Resources.Load("Fire Prefab"));
+				cubeup.transform.position = new Vector3 (pos.x, pos.y + y, 0);
+				GameObject cubedown = (GameObject)Instantiate(Resources.Load("Fire Prefab"));
+				cubedown.transform.position = new Vector3 (pos.x, pos.y - y, 0);
+				Destroy (cubeup, wingsTime);
+				Destroy (cubedown, wingsTime);
+				Debug.Log ("FYWAINGS" + pos);
+				cubeup.transform.parent = dummyObject.transform;
+				cubedown.transform.parent = dummyObject.transform;
+				ishorizontal = false;
+			}
+			if (anim.GetCurrentAnimatorStateInfo (0).IsName ("Playeridleup") || anim.GetCurrentAnimatorStateInfo (0).IsName ("Playeridledown")) {
+				GameObject cubeup = (GameObject)Instantiate(Resources.Load("Fire Prefab"));
+				//cube.AddComponent<Rigidbody>();
+				cubeup.transform.position = new Vector3 (pos.x + y, pos.y, 0);
+				GameObject cubedown = (GameObject)Instantiate(Resources.Load("Fire Prefab"));
+				cubedown.transform.position = new Vector3 (pos.x - y, pos.y, 0);
+				Destroy (cubeup, wingsTime);
+				Destroy (cubedown, wingsTime);
+				Debug.Log ("FYWAINGS" + pos);
+				cubeup.transform.parent = dummyObject.transform;
+				cubedown.transform.parent = dummyObject.transform;
+				ishorizontal = true;
+			}
+		}	
+	} 
+	void FireDash(){
+		if (anim.GetCurrentAnimatorStateInfo (0).IsName ("Playeridleright")) {
+			pos += 2*Vector3.left;
+			transform.position = Vector3.MoveTowards(transform.position, pos, Time.deltaTime * speed*8); 
+		}
+		if (anim.GetCurrentAnimatorStateInfo (0).IsName ("Playeridleleft")) {
+			pos += 2*Vector3.right;
+			transform.position = Vector3.MoveTowards(transform.position, pos, Time.deltaTime * speed*8); 
+		}
+		if (anim.GetCurrentAnimatorStateInfo (0).IsName ("Playeridleup")) {
+			pos += 2*Vector3.down;
+			transform.position = Vector3.MoveTowards(transform.position, pos, Time.deltaTime * speed*8); 
+		}
+		if (anim.GetCurrentAnimatorStateInfo (0).IsName ("Playeridledown")) {
+			pos += 2*Vector3.up;
+			transform.position = Vector3.MoveTowards(transform.position, pos, Time.deltaTime * speed*8); 
+		}
+	}
+	void Movement(){
 		if(Input.GetKey(KeyCode.A) && transform.position == pos) {        // Left
 			if(Input.GetKey(KeyCode.LeftShift)){
 				anim.Play("Playeridleleft");
 			}
-				else{	
-			pos += Vector3.left;
-			anim.Play("Walkingleft");
+			else{	
+				pos += Vector3.left;
+				anim.Play("Walkingleft");
 			}
+
 		}
 		if(Input.GetKey(KeyCode.D) && transform.position == pos) {        // Right
 			if (Input.GetKey (KeyCode.LeftShift)) {
@@ -63,7 +163,7 @@ public class CharacterMovement : MonoBehaviour {
 			pos += Vector3.up;
 			anim.Play("Walkingleft");
 		}
-		if(Input.GetKey(KeyCode.E) && transform.position == pos) {        // Left
+		if(Input.GetKey(KeyCode.E) && transform.position == pos) {        // Right
 			pos += Vector3.right;
 			pos += Vector3.up;
 			anim.Play("Walkingright");
@@ -73,15 +173,12 @@ public class CharacterMovement : MonoBehaviour {
 			pos += Vector3.down;
 			anim.Play("Walkingleft");
 		}
-		if(Input.GetKey(KeyCode.C) && transform.position == pos) {        // Left
+		if(Input.GetKey(KeyCode.C) && transform.position == pos) {        // Right
 			pos += Vector3.right;
 			pos += Vector3.down;
 			anim.Play("Walkingright");
 		}
-			
 		transform.position = Vector3.MoveTowards(transform.position, pos, Time.deltaTime * speed); 
-
-		//Animation Transitions
 		if(anim.GetCurrentAnimatorStateInfo(0).IsName("Walkingright") && transform.position == pos)
 		{
 			anim.Play ("Playeridleright");
@@ -98,24 +195,33 @@ public class CharacterMovement : MonoBehaviour {
 		{
 			anim.Play ("Playeridledown");
 		}
-		//ATTACK SELECTION
-		if (Input.GetMouseButtonDown (1)) {
-			RayCaster ();
-			//BasicAttack ();
-		}
-		
-	}
-	void RayCaster (){
-		Debug.Log ("Pressed right click.");
-		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-		RaycastHit hit;
-		if(Physics.Raycast(ray, out hit,10)){
-			if (hit.transform.tag == "Enemy") {
-				selectedenemy = hit.transform.gameObject;
-				Debug.Log ("You got an enemy biaaaatch and his name is " + selectedenemy.ToString()	);
-				enemyhealthscript = selectedenemy.transform.gameObject.transform.GetComponentInChildren<EnemyHealth> ();
-				enemyhealthscript.ReceiveDamage (1);
+		if (anim.GetCurrentAnimatorStateInfo (0).IsName ("Playeridleright") || anim.GetCurrentAnimatorStateInfo (0).IsName ("Playeridleleft") || anim.GetCurrentAnimatorStateInfo (0).IsName ("Walkingright") || anim.GetCurrentAnimatorStateInfo (0).IsName ("Walkingleft")) {
+			if (ishorizontal == true) {
+				rot.z = 90;
+				dummyObject.transform.rotation = Quaternion.Euler (rot);
+				ishorizontal = false;
 			}
+		}
+		if (anim.GetCurrentAnimatorStateInfo (0).IsName ("Playeridledown") || anim.GetCurrentAnimatorStateInfo (0).IsName ("Playeridleup") || anim.GetCurrentAnimatorStateInfo (0).IsName ("Walkingdown") || anim.GetCurrentAnimatorStateInfo (0).IsName ("Walkingup")) {
+			if (ishorizontal == false) {
+				rot.z = 0;
+				dummyObject.transform.rotation = Quaternion.Euler (rot);
+				ishorizontal = true;
+			}
+		}
+
+	}
+	//void 
+	void spellhotkeys (){
+		if (Input.GetKeyDown(KeyCode.Alpha1)){
+			spells.FireBeam3by3();
+		}
+		if (Input.GetKeyDown(KeyCode.Alpha2)) {
+			//			spells.drawcircle (0, 0, 15);	
+			FireDash();
+		}
+		if (Input.GetKeyDown(KeyCode.Alpha3)) {
+			FireWings ();
 		}
 	}
 }

@@ -51,12 +51,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\CharacterSpells1.cs" />
-     <Compile Include="Assets\EnemyBehaviour.cs" />
-     <Compile Include="Assets\EnemyHealth.cs" />
-     <Compile Include="Assets\EnemyStats.cs" />
-     <Compile Include="Assets\MouseClicker.cs" />
+     <Compile Include="Assets\FireFieldScript.cs" />
+     <Compile Include="Assets\PlayerHealth.cs" />
      <Compile Include="Assets\Scripts\CharacterMovement.cs" />
+     <Compile Include="Assets\Scripts\CharacterSpells1.cs" />
+     <Compile Include="Assets\Scripts\EnemyBehaviour.cs" />
+     <Compile Include="Assets\Scripts\EnemyHealth.cs" />
+     <Compile Include="Assets\Scripts\EnemyStats.cs" />
+     <Compile Include="Assets\Scripts\MouseClicker.cs" />
+     <Compile Include="Assets\SlimeAI.cs" />
      <None Include="Assets\roguelike-pack\Spritesheet\spritesheetInfo.txt" />
      <None Include="Assets\roguelike-pack\License.txt" />
  <Reference Include="Facebook.Unity.Settings">

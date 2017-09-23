@@ -8,14 +8,13 @@ public class EnemyHealth : MonoBehaviour {
 	public Text myhp = null; 
 	public float maxhp;
 	public float curhp;
-	public SpriteRenderer rendererer;
+	//public SpriteRenderer rendererer;
+
 	// Use this for initialization
 	void Start () {
-		maxhp = 10;
-		curhp = 10;
 		myhp = GetComponentInChildren<Text> ();
 		myhp.text = curhp.ToString() + "/" + maxhp.ToString();
-		rendererer = GetComponentInParent<SpriteRenderer> ();
+		//rendererer = GetComponentInParent<SpriteRenderer> ();
 	}
 
 	// Update is called once per frame
@@ -29,5 +28,11 @@ public class EnemyHealth : MonoBehaviour {
 	public void ReceiveDamage (float dmg){
 		curhp = curhp- dmg;
 		Debug.Log (curhp);
+	}
+	void OnTriggerEnter(Collider other){
+		if (other.transform.tag == "Fire") {
+			ReceiveDamage (20);
+			Debug.Log ("FIRE");
+		}
 	}
 }
