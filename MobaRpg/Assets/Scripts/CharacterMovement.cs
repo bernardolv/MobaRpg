@@ -7,18 +7,26 @@ public class CharacterMovement : MonoBehaviour {
 	Vector3 pos;
 	public float speed;
 	private Animator anim;
-	public GameObject selectedenemy;	
-	public EnemyHealth enemyhealthscript;
-	public CharacterSpells1 spells;
+	GameObject selectedenemy;	
+	EnemyHealth enemyhealthscript;
+	CharacterSpells1 spells;
 	public float wingsTime;
-	public GameObject Player;
-	public GameObject dummyObject;
+	GameObject Player;
+	GameObject dummyObject;
 	Vector3 rot;
-	public bool ishorizontal;
+	bool ishorizontal;
 	public  float AutoAttackCooldown;
 	public float AutoAttackCurTime;
-	public bool aggro;
-	public SlimeAI enemyAI;
+	bool aggro;
+	EnemyAI enemyAI;
+	public float attackDistance;
+	float xydif;
+	float targetx;
+	float targety;
+	float myx;
+	float myy;
+	float xdif;
+	float ydif;
 
 	void Start () {
 		//int animvalue;
@@ -32,7 +40,7 @@ public class CharacterMovement : MonoBehaviour {
 		dummyObject = new GameObject("Dummy Object");
 		rot = dummyObject.transform.rotation.eulerAngles;
 		dummyObject.transform.parent = Player.transform;
-
+		dummyObject.transform.position = pos;
 	
 	}
 	void Update () {
@@ -41,19 +49,29 @@ public class CharacterMovement : MonoBehaviour {
 		if (Input.GetMouseButtonDown (1)) {
 			RayCaster ();
 		}
-		if (selectedenemy != null) {
+		if (selectedenemy != null){
+			targetx = selectedenemy.transform.position.x;  //All this to measure the block and then run against attackDistance
+			targety = selectedenemy.transform.position.y;
+			myx = transform.position.x;
+			myy = transform.position.y;
+			ydif = Mathf.Abs(myy - targety);
+			xdif = Mathf.Abs(myx - targetx);
+			xydif = ydif+xdif;
 			if (AutoAttackCurTime < AutoAttackCooldown) {
 				AutoAttackCurTime += Time.deltaTime;
 			} 
-			else {
+			else if(xydif <= attackDistance){
 				enemyhealthscript.ReceiveDamage (10);
 				AutoAttackCurTime = 0;
+					Debug.Log(xydif);
+			}
+			else{
 			}
 		}
 		spellhotkeys ();
 	}
 	void RayCaster (){
-		Debug.Log (Vector3.down);
+		//Debug.Log (Vector3.down);
 		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 		RaycastHit hit;
 		if(Physics.Raycast(ray, out hit,10)){
@@ -61,11 +79,11 @@ public class CharacterMovement : MonoBehaviour {
 				selectedenemy = hit.transform.gameObject;
 				Debug.Log ("You got an enemy biaaaatch and his name is " + selectedenemy.ToString()	);
 				enemyhealthscript = selectedenemy.transform.gameObject.transform.GetComponentInChildren<EnemyHealth> ();
-				enemyAI = selectedenemy.transform.gameObject.transform.GetComponentInChildren<SlimeAI> ();
+				enemyAI = selectedenemy.transform.gameObject.transform.GetComponentInChildren<EnemyAI> ();
 				GameObject frame = (GameObject)Instantiate(Resources.Load("Selected_Frame"));
 				frame.transform.position = selectedenemy.transform.position;
 				frame.transform.parent = selectedenemy.transform;
-				aggro = true;
+				//aggro = true;
 				enemyAI.aggro = true;
 				enemyAI.target = this.gameObject;
 
@@ -179,20 +197,16 @@ public class CharacterMovement : MonoBehaviour {
 			anim.Play("Walkingright");
 		}
 		transform.position = Vector3.MoveTowards(transform.position, pos, Time.deltaTime * speed); 
-		if(anim.GetCurrentAnimatorStateInfo(0).IsName("Walkingright") && transform.position == pos)
-		{
+		if(anim.GetCurrentAnimatorStateInfo(0).IsName("Walkingright") && transform.position == pos){
 			anim.Play ("Playeridleright");
 		}
-		if(anim.GetCurrentAnimatorStateInfo(0).IsName("Walkingleft") && transform.position == pos)
-		{
+		if(anim.GetCurrentAnimatorStateInfo(0).IsName("Walkingleft") && transform.position == pos){
 			anim.Play ("Playeridleleft");
 		}
-		if(anim.GetCurrentAnimatorStateInfo(0).IsName("Walkingup") && transform.position == pos)
-		{
+		if(anim.GetCurrentAnimatorStateInfo(0).IsName("Walkingup") && transform.position == pos){
 			anim.Play ("Playeridleup");
 		}
-		if(anim.GetCurrentAnimatorStateInfo(0).IsName("Walkingdown") && transform.position == pos)
-		{
+		if(anim.GetCurrentAnimatorStateInfo(0).IsName("Walkingdown") && transform.position == pos){
 			anim.Play ("Playeridledown");
 		}
 		if (anim.GetCurrentAnimatorStateInfo (0).IsName ("Playeridleright") || anim.GetCurrentAnimatorStateInfo (0).IsName ("Playeridleleft") || anim.GetCurrentAnimatorStateInfo (0).IsName ("Walkingright") || anim.GetCurrentAnimatorStateInfo (0).IsName ("Walkingleft")) {
@@ -211,6 +225,9 @@ public class CharacterMovement : MonoBehaviour {
 		}
 
 	}
+	void DashAndMash(){
+		enemyAI.Stun ();
+	}
 	//void 
 	void spellhotkeys (){
 		if (Input.GetKeyDown(KeyCode.Alpha1)){
@@ -222,6 +239,10 @@ public class CharacterMovement : MonoBehaviour {
 		}
 		if (Input.GetKeyDown(KeyCode.Alpha3)) {
 			FireWings ();
+		}		
+		if (Input.GetKeyDown(KeyCode.Alpha4)) {
+			//spells.DrawFilledCircle (0,0,2);
+			DashAndMash ();
 		}
 	}
 }

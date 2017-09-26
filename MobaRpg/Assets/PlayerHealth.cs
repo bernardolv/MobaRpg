@@ -25,7 +25,7 @@ public class PlayerHealth : MonoBehaviour {
 	}
 	public void ReceiveDamage (float dmg){
 		curhp = curhp- dmg;
-		Debug.Log (curhp);
+		//Debug.Log (curhp);
 	}
 	void OnTriggerEnter (Collider other){
 		Debug.Log ("EZ");

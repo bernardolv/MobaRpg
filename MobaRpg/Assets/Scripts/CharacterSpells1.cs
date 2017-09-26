@@ -154,16 +154,19 @@ public class CharacterSpells1 : MonoBehaviour {
 
 		while (x >= y)
 		{
-			GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
 			for (int i = x0 - x; i <= x0 + x; i++)
 			{
-				cube.transform.position = new Vector3(i, y0 + y);
-				cube.transform.position = new Vector3(i, y0 - y);
+				GameObject cube1 = GameObject.CreatePrimitive(PrimitiveType.Cube);
+				cube1.transform.position = new Vector3(i, y0 + y);
+				GameObject cube2 = GameObject.CreatePrimitive(PrimitiveType.Cube);
+				cube2.transform.position = new Vector3(i, y0 - y);
 			}
 			for (int i = x0 - y; i <= x0 + y; i++)
 			{
-				cube.transform.position = new Vector3(i, y0 + x);
-				cube.transform.position = new Vector3(i, y0 - x);
+				GameObject cube1 = GameObject.CreatePrimitive(PrimitiveType.Cube);
+				cube1.transform.position = new Vector3(i, y0 + x);
+				GameObject cube2 = GameObject.CreatePrimitive(PrimitiveType.Cube);
+				cube2.transform.position = new Vector3(i, y0 - x);
 			}
 
 			y++;
