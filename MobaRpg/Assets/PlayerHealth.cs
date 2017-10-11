@@ -28,7 +28,7 @@ public class PlayerHealth : MonoBehaviour {
 		//Debug.Log (curhp);
 	}
 	void OnTriggerEnter (Collider other){
-		Debug.Log ("EZ");
+		//Debug.Log ("EZ");
 		if (other.transform.tag == "Fire") {
 			ReceiveDamage (20);
 			Debug.Log ("DAMAGE");

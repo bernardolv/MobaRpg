@@ -9,6 +9,7 @@ TagManager:
   - Current Target
   - Fire
   - TotemHeal
+  - Selected_Frame
   layers:
   - Default
   - TransparentFX

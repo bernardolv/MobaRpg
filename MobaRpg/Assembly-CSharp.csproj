@@ -60,6 +60,7 @@
      <Compile Include="Assets\Scripts\EnemyHealth.cs" />
      <Compile Include="Assets\Scripts\EnemyStats.cs" />
      <Compile Include="Assets\Scripts\MouseClicker.cs" />
+     <Compile Include="Assets\SpawnBehaviour.cs" />
      <None Include="Assets\roguelike-pack\Spritesheet\spritesheetInfo.txt" />
      <None Include="Assets\roguelike-pack\License.txt" />
  <Reference Include="Facebook.Unity.Settings">

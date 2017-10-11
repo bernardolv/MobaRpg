@@ -27,6 +27,7 @@ public class CharacterMovement : MonoBehaviour {
 	float myy;
 	float xdif;
 	float ydif;
+	GameObject currenttarget;
 
 	void Start () {
 		//int animvalue;
@@ -41,15 +42,27 @@ public class CharacterMovement : MonoBehaviour {
 		rot = dummyObject.transform.rotation.eulerAngles;
 		dummyObject.transform.parent = Player.transform;
 		dummyObject.transform.position = pos;
+		aggro = false;
+
 	
 	}
 	void Update () {
 		Movement ();
+		if (selectedenemy == null){
+			aggro = false;
+		}
 		//ATTACK SELECTION
 		if (Input.GetMouseButtonDown (1)) {
 			RayCaster ();
 		}
 		if (selectedenemy != null){
+			if (enemyhealthscript.curhp <= 0) {
+				GameObject frame = GameObject.FindGameObjectWithTag ("Selected_Frame");
+				Destroy (frame);	
+				Debug.Log ("DESTROY");
+				selectedenemy = null;
+				aggro = false;
+			}
 			targetx = selectedenemy.transform.position.x;  //All this to measure the block and then run against attackDistance
 			targety = selectedenemy.transform.position.y;
 			myx = transform.position.x;
@@ -63,7 +76,8 @@ public class CharacterMovement : MonoBehaviour {
 			else if(xydif <= attackDistance){
 				enemyhealthscript.ReceiveDamage (10);
 				AutoAttackCurTime = 0;
-					Debug.Log(xydif);
+				Debug.Log ("pew");
+					//Debug.Log(xydif);
 			}
 			else{
 			}
@@ -80,13 +94,32 @@ public class CharacterMovement : MonoBehaviour {
 				Debug.Log ("You got an enemy biaaaatch and his name is " + selectedenemy.ToString()	);
 				enemyhealthscript = selectedenemy.transform.gameObject.transform.GetComponentInChildren<EnemyHealth> ();
 				enemyAI = selectedenemy.transform.gameObject.transform.GetComponentInChildren<EnemyAI> ();
-				GameObject frame = (GameObject)Instantiate(Resources.Load("Selected_Frame"));
-				frame.transform.position = selectedenemy.transform.position;
-				frame.transform.parent = selectedenemy.transform;
-				//aggro = true;
-				enemyAI.aggro = true;
-				enemyAI.target = this.gameObject;
-
+				if (aggro == false) {
+					GameObject frame = (GameObject)Instantiate (Resources.Load ("Selected_Frame"));
+					frame.transform.position = selectedenemy.transform.position;
+					frame.transform.parent = selectedenemy.transform;
+					enemyAI.aggro = true;
+					Debug.Log ("frane");
+					//selectframe = frame;
+					if (enemyAI.target == null) {
+						enemyAI.target = this.gameObject;
+					}
+					//aggro = true;
+					currenttarget = selectedenemy;
+				}
+				if (aggro == true && selectedenemy == currenttarget ) {
+					GameObject frame = GameObject.FindGameObjectWithTag ("Selected_Frame");
+					Destroy (frame);	
+					Debug.Log ("DESTROY");
+					selectedenemy = null;
+					//aggro = false;
+				}
+				if (aggro == false) {
+					aggro = true;
+				}
+				else {
+					aggro = false;
+				}
 			}
 		}
 	}	
@@ -196,7 +229,9 @@ public class CharacterMovement : MonoBehaviour {
 			pos += Vector3.down;
 			anim.Play("Walkingright");
 		}
+			
 		transform.position = Vector3.MoveTowards(transform.position, pos, Time.deltaTime * speed); 
+
 		if(anim.GetCurrentAnimatorStateInfo(0).IsName("Walkingright") && transform.position == pos){
 			anim.Play ("Playeridleright");
 		}

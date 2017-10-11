@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 212057865409488846}
   m_Layer: 0
   m_Name: Selected_Frame
-  m_TagString: Untagged
+  m_TagString: Selected_Frame
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
