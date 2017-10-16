@@ -5,6 +5,8 @@ using UnityEngine;
 public class CharacterMovement : MonoBehaviour {
 
 	Vector3 pos;
+	Vector3 rayDirection;
+	Vector3 rayOrigin;
 	public float speed;
 	private Animator anim;
 	GameObject selectedenemy;	
@@ -28,6 +30,9 @@ public class CharacterMovement : MonoBehaviour {
 	float xdif;
 	float ydif;
 	GameObject currenttarget;
+	TileHandler tilescript;
+	GameObject tileobject;
+	bool istiletaken;
 
 	void Start () {
 		//int animvalue;
@@ -179,6 +184,7 @@ public class CharacterMovement : MonoBehaviour {
 			else{	
 				pos += Vector3.left;
 				anim.Play("Walkingleft");
+				FindTileTag();
 			}
 
 		}
@@ -189,6 +195,7 @@ public class CharacterMovement : MonoBehaviour {
 			else {	
 				pos += Vector3.right;
 				anim.Play ("Walkingright");
+				FindTileTag();
 			}
 		}
 		if(Input.GetKey(KeyCode.W) && transform.position == pos) {        // Up
@@ -198,6 +205,7 @@ public class CharacterMovement : MonoBehaviour {
 			else {	
 				pos += Vector3.up;
 				anim.Play ("Walkingup");
+				FindTileTag();
 			}
 		}
 		if(Input.GetKey (KeyCode.S) && transform.position == pos) {        // Down
@@ -207,31 +215,42 @@ public class CharacterMovement : MonoBehaviour {
 			else {	
 				pos += Vector3.down;
 				anim.Play ("Walkingdown");
+				FindTileTag();
 			}
 		} 
 		if(Input.GetKey(KeyCode.Q) && transform.position == pos) {        // Left
 			pos += Vector3.left;
 			pos += Vector3.up;
 			anim.Play("Walkingleft");
+			FindTileTag();
 		}
 		if(Input.GetKey(KeyCode.E) && transform.position == pos) {        // Right
 			pos += Vector3.right;
 			pos += Vector3.up;
 			anim.Play("Walkingright");
+			FindTileTag();
 		}
 		if(Input.GetKey(KeyCode.Z) && transform.position == pos) {        // Left
 			pos += Vector3.left;
 			pos += Vector3.down;
 			anim.Play("Walkingleft");
+			FindTileTag();
 		}
 		if(Input.GetKey(KeyCode.C) && transform.position == pos) {        // Right
 			pos += Vector3.right;
 			pos += Vector3.down;
 			anim.Play("Walkingright");
+			FindTileTag();
 		}
 			
-		transform.position = Vector3.MoveTowards(transform.position, pos, Time.deltaTime * speed); 
-
+		if (transform.position != pos) {
+			if (istiletaken == true) {
+				pos = transform.position;
+			} 
+			else {
+				transform.position = Vector3.MoveTowards (transform.position, pos, Time.deltaTime * speed); 
+			}
+		}
 		if(anim.GetCurrentAnimatorStateInfo(0).IsName("Walkingright") && transform.position == pos){
 			anim.Play ("Playeridleright");
 		}
@@ -278,6 +297,33 @@ public class CharacterMovement : MonoBehaviour {
 		if (Input.GetKeyDown(KeyCode.Alpha4)) {
 			//spells.DrawFilledCircle (0,0,2);
 			DashAndMash ();
+		}
+	}
+	void CheckIsTaken(){
+		rayOrigin = pos;
+		rayOrigin += Vector3.back;
+		rayDirection = pos;
+		Ray ray = new Ray (rayOrigin, rayDirection);
+		RaycastHit hit;
+		Debug.Log(pos);
+
+		//Ray ray = pos;		RaycastHit hit;
+		if (Physics.Raycast (ray, 2)) {
+			Debug.Log(pos);
+			//Debug.Log(hit);
+		}
+	}
+	void FindTileTag(){
+		Collider[] colliders = Physics.OverlapSphere(pos, .1f); ///Presuming the object you are testing also has a collider 0 otherwise{
+			foreach(Collider component in colliders){
+			if (component.tag == "Ground") {
+				//Debug.Log (component.tag);
+				tileobject = component.gameObject;
+				tilescript = tileobject.GetComponent<TileHandler> ();
+				istiletaken = tilescript.isTaken;
+				//Debug.Log (tilescript.isTaken);
+			}
+
 		}
 	}
 }
