@@ -40,6 +40,7 @@ public class EnemyAI : MonoBehaviour {
 	TileHandler tilescript;
 	GameObject tileobject;
 	bool istiletaken;
+	bool canfollowretrig;
 
 	// Use this for initialization
 	void Start () {
@@ -56,6 +57,7 @@ public class EnemyAI : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () { //Controls Autoattacks and Movement
+		Invoke("FixCanFollow", 3);
 		if (isdead == false){
 			AliveBehaviour();
 			//Animator state slime
@@ -336,6 +338,11 @@ public class EnemyAI : MonoBehaviour {
 		else {                  			//what to do when no target.
 			Idlewalk();
 		}
+	}
+	void FixCanFollow(){
+		canfollow = true;
+		CancelInvoke ();
+
 	}
 	/*void RandomTimer(){
 		float randomcounter = 0

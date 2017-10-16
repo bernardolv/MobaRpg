@@ -2,13 +2,13 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/EnemyAI.cs">
     <Files>
-      <File FileName="Assets/TileHandler.cs" Line="21" Column="3" />
-      <File FileName="Assets/SpawnBehaviour.cs" Line="31" Column="29" />
-      <File FileName="Assets/Scripts/CharacterMovement.cs" Line="84" Column="7" />
-      <File FileName="Assets/Scripts/EnemyHealth.cs" Line="32" Column="17" />
+      <File FileName="Assets/EnemyAI.cs" Line="129" Column="42" />
+      <File FileName="Assets/TileHandler.cs" Line="1" Column="1" />
+      <File FileName="Assets/SpawnBehaviour.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/CharacterMovement.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/EnemyHealth.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/EnemyStats.cs" Line="1" Column="1" />
-      <File FileName="Assets/EnemyAI.cs" Line="259" Column="23" />
-      <File FileName="Assets/Scripts/MouseClicker.cs" Line="13" Column="1" />
+      <File FileName="Assets/Scripts/MouseClicker.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
