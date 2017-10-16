@@ -37,6 +37,9 @@ public class EnemyAI : MonoBehaviour {
 	bool inrangedi;
 	public bool cancheck;//direciton inticator for left-right, up-down
 	public bool isdead;
+	TileHandler tilescript;
+	GameObject tileobject;
+	bool istiletaken;
 
 	// Use this for initialization
 	void Start () {
@@ -112,11 +115,13 @@ public class EnemyAI : MonoBehaviour {
 					movedirection += Vector3.right;
 					moving = true;
 					canfollow = false;
+					FindTileTag ();
 				}
 				if (myx > targetx) {
 					movedirection += Vector3.left;
 					moving = true;
 					canfollow = false;
+					FindTileTag ();
 				}
 			}
 			if (ishorizontal == false && canfollow == true && moving == false) { // if vertical is bigger diference
@@ -124,18 +129,27 @@ public class EnemyAI : MonoBehaviour {
 					movedirection += Vector3.up;
 					moving = true;
 					canfollow = false;
+					FindTileTag ();
 				}
 				if (myy > targety) {
 					movedirection += Vector3.down;
 					moving = true;
 					canfollow = false;
+					FindTileTag ();
 				}
 			}
 			if (xdif == ydif ) { // if in perfect diagonal, it draws a random number to decide wether horizontal or vertical next move
 				ishorizontal = Random.value > 0.5f;
 			}
 			if (moving == true) {//keep moving if not yet centered at a tile, turns shit off 
-				transform.position = Vector3.MoveTowards (transform.position, movedirection, Time.deltaTime * movespeed); 
+				if (istiletaken == true) {
+					movedirection = transform.position;
+					moving = false;
+					canfollow = true;
+				} 
+				else {
+					transform.position = Vector3.MoveTowards (transform.position, movedirection, Time.deltaTime * movespeed); 
+				}
 				if (movedirection == transform.position) {
 					moving = false;
 					canfollow = true;
@@ -257,7 +271,7 @@ public class EnemyAI : MonoBehaviour {
 						canmove = false;
 					}
 					if(inrangedi == true && myx > targetx){
-						Debug.Log ("caso 2");
+							Debug.Log ("caso 2");
 						movedirection += Vector3.left;
 						moving = true;
 						inrangemove = false;
@@ -287,6 +301,19 @@ public class EnemyAI : MonoBehaviour {
 		}
 		if (xdif < ydif) { // for random purposes
 			ishorizontal = true;
+		}
+	}
+	void FindTileTag(){
+		Collider[] colliders = Physics.OverlapSphere(movedirection, .1f); ///Presuming the object you are testing also has a collider 0 otherwise{
+		foreach(Collider component in colliders){
+			if (component.tag == "Ground") {
+				//Debug.Log (component.tag);
+				tileobject = component.gameObject;
+				tilescript = tileobject.GetComponent<TileHandler> ();
+				istiletaken = tilescript.isTaken;
+				//Debug.Log (tilescript.isTaken);
+			}
+
 		}
 	}
 	void AliveBehaviour(){

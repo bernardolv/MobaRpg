@@ -81,7 +81,7 @@ public class CharacterMovement : MonoBehaviour {
 			else if(xydif <= attackDistance){
 				enemyhealthscript.ReceiveDamage (10);
 				AutoAttackCurTime = 0;
-				Debug.Log ("pew");
+				//Debug.Log ("pew");
 					//Debug.Log(xydif);
 			}
 			else{

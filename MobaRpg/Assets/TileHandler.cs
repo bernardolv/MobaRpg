@@ -18,8 +18,8 @@ public class TileHandler : MonoBehaviour {
 
 	void OnTriggerEnter(Collider other){
 		isTaken = true;
-		Debug.Log ("istaken");
-		Debug.Log (pos);
+//		Debug.Log ("istaken");
+//		Debug.Log (pos);
 	}
 	void OnTriggerExit(Collider other){
 		isTaken = false;
