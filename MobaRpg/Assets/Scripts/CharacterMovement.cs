@@ -4,18 +4,19 @@ using UnityEngine;
 
 public class CharacterMovement : MonoBehaviour {
 
-	Vector3 pos;
+	public Vector3 pos;
+	Vector3 pos2;
 	Vector3 rayDirection;
 	Vector3 rayOrigin;
 	public float speed;
 	private Animator anim;
 	GameObject selectedenemy;	
 	EnemyHealth enemyhealthscript;
-	CharacterSpells1 spells;
+//	CharacterSpells1 spells;
 	public float wingsTime;
 	GameObject Player;
 	GameObject dummyObject;
-	Vector3 rot;
+//	Vector3 rot;
 	bool ishorizontal;
 	public  float AutoAttackCooldown;
 	public float AutoAttackCurTime;
@@ -33,6 +34,7 @@ public class CharacterMovement : MonoBehaviour {
 	TileHandler tilescript;
 	GameObject tileobject;
 	bool istiletaken;
+	bool canmove;
 
 	void Start () {
 		//int animvalue;
@@ -40,11 +42,11 @@ public class CharacterMovement : MonoBehaviour {
 		//rot = transform.rotation.eulerAngles;
 		anim = GetComponent<Animator> ();
 		speed = 4;
-		spells = GetComponent<CharacterSpells1> ();
+		//spells = GetComponent<CharacterSpells1> ();
 		//animvalue = 0;
 		Player = this.gameObject;
 		dummyObject = new GameObject("Dummy Object");
-		rot = dummyObject.transform.rotation.eulerAngles;
+		//rot = dummyObject.transform.rotation.eulerAngles;
 		dummyObject.transform.parent = Player.transform;
 		dummyObject.transform.position = pos;
 		aggro = false;
@@ -56,38 +58,13 @@ public class CharacterMovement : MonoBehaviour {
 		if (selectedenemy == null){
 			aggro = false;
 		}
-		//ATTACK SELECTION
 		if (Input.GetMouseButtonDown (1)) {
 			RayCaster ();
 		}
 		if (selectedenemy != null){
-			if (enemyhealthscript.curhp <= 0) {
-				GameObject frame = GameObject.FindGameObjectWithTag ("Selected_Frame");
-				Destroy (frame);	
-				Debug.Log ("DESTROY");
-				selectedenemy = null;
-				aggro = false;
-			}
-			targetx = selectedenemy.transform.position.x;  //All this to measure the block and then run against attackDistance
-			targety = selectedenemy.transform.position.y;
-			myx = transform.position.x;
-			myy = transform.position.y;
-			ydif = Mathf.Abs(myy - targety);
-			xdif = Mathf.Abs(myx - targetx);
-			xydif = ydif+xdif;
-			if (AutoAttackCurTime < AutoAttackCooldown) {
-				AutoAttackCurTime += Time.deltaTime;
-			} 
-			else if(xydif <= attackDistance){
-				enemyhealthscript.ReceiveDamage (10);
-				AutoAttackCurTime = 0;
-				//Debug.Log ("pew");
-					//Debug.Log(xydif);
-			}
-			else{
-			}
+			PlayerAutoattack ();
 		}
-		spellhotkeys ();
+//		spellhotkeys ();
 	}
 	void RayCaster (){
 		//Debug.Log (Vector3.down);
@@ -128,7 +105,7 @@ public class CharacterMovement : MonoBehaviour {
 			}
 		}
 	}	
-	void FireWings (){
+	/*void FireWings (){
 		for (int y = 1; y < 4; y++) {
 			if ((anim.GetCurrentAnimatorStateInfo (0).IsName ("Playeridleright") || anim.GetCurrentAnimatorStateInfo (0).IsName ("Playeridleleft")) && transform.position == pos) {
 				//Spawning vertical
@@ -157,26 +134,100 @@ public class CharacterMovement : MonoBehaviour {
 				ishorizontal = true;
 			}
 		}	
-	} 
-	void FireDash(){
+	} */
+	/*void FireDash(){
 		if (anim.GetCurrentAnimatorStateInfo (0).IsName ("Playeridleright")) {
 			pos += 2*Vector3.left;
-			transform.position = Vector3.MoveTowards(transform.position, pos, Time.deltaTime * speed*8); 
-		}
+			pos2 = pos - Vector3.left;
+			}
 		if (anim.GetCurrentAnimatorStateInfo (0).IsName ("Playeridleleft")) {
 			pos += 2*Vector3.right;
-			transform.position = Vector3.MoveTowards(transform.position, pos, Time.deltaTime * speed*8); 
-		}
+			pos2 = pos - Vector3.right;
+			}
 		if (anim.GetCurrentAnimatorStateInfo (0).IsName ("Playeridleup")) {
 			pos += 2*Vector3.down;
-			transform.position = Vector3.MoveTowards(transform.position, pos, Time.deltaTime * speed*8); 
-		}
+			pos2 = pos - Vector3.down;
+			}
 		if (anim.GetCurrentAnimatorStateInfo (0).IsName ("Playeridledown")) {
 			pos += 2*Vector3.up;
-			transform.position = Vector3.MoveTowards(transform.position, pos, Time.deltaTime * speed*8); 
+			pos2 = pos - Vector3.up;
+			}
+		FindTileTag ();
+		if (istiletaken == true) {
+			pos = pos2;
+			FindTileTag();
+			if (istiletaken == true) {
+				pos = transform.position;
+			}
+			else {
+				tilescript.isTaken = true;
+				transform.position = Vector3.MoveTowards (transform.position, pos, Time.deltaTime * speed); 
+			}
+		} 
+		else {
+			tilescript.isTaken = true;
+			transform.position = Vector3.MoveTowards (transform.position, pos, Time.deltaTime * speed); 
+		}
+	}*/
+	/*void spellhotkeys (){
+		if (Input.GetKeyDown(KeyCode.Alpha1)){
+		FireBeam3by3();
+	}
+	if (Input.GetKeyDown(KeyCode.Alpha2)) {
+		FireDash();
+	}
+	if (Input.GetKeyDown(KeyCode.Alpha3)) {
+		FireWings ();
+	}		
+	if (Input.GetKeyDown(KeyCode.Alpha4)) {
+		DashAndMash ();
+	}
+	}*/
+	void Movement(){
+		QwertyMovement ();
+		if (pos != transform.position) {
+			MoveifnotTaken ();
+		}
+		ResetIdleAnimation ();
+		//DummyObjectRotation ();
+	}
+	void DashAndMash(){
+		enemyAI.Stun ();
+	}
+	void FindTileTag(){
+		Collider[] colliders = Physics.OverlapSphere(pos, .1f); ///Presuming the object you are testing also has a collider 0 otherwise{
+			foreach(Collider component in colliders){
+			if (component.tag == "Ground") {
+				tileobject = component.gameObject;
+				tilescript = tileobject.GetComponent<TileHandler> ();
+				istiletaken = tilescript.isTaken;
+			}
 		}
 	}
-	void Movement(){
+	void MoveifnotTaken(){
+		if (istiletaken == true) {
+			pos = transform.position;
+		} 
+		else {
+			tilescript.isTaken = true;
+			transform.position = Vector3.MoveTowards (transform.position, pos, Time.deltaTime * speed); 
+		}
+	}
+	void ResetIdleAnimation(){
+		if(anim.GetCurrentAnimatorStateInfo(0).IsName("Walkingright") && transform.position == pos){
+			anim.Play ("Playeridleright");
+		}
+		if(anim.GetCurrentAnimatorStateInfo(0).IsName("Walkingleft") && transform.position == pos){
+			anim.Play ("Playeridleleft");
+		}
+		if(anim.GetCurrentAnimatorStateInfo(0).IsName("Walkingup") && transform.position == pos){
+			anim.Play ("Playeridleup");
+		}
+		if(anim.GetCurrentAnimatorStateInfo(0).IsName("Walkingdown") && transform.position == pos){
+			anim.Play ("Playeridledown");
+		}
+	}
+	void QwertyMovement(){
 		if(Input.GetKey(KeyCode.A) && transform.position == pos) {        // Left
 			if(Input.GetKey(KeyCode.LeftShift)){
 				anim.Play("Playeridleleft");
@@ -242,88 +293,32 @@ public class CharacterMovement : MonoBehaviour {
 			anim.Play("Walkingright");
 			FindTileTag();
 		}
-			
-		if (transform.position != pos) {
-			if (istiletaken == true) {
-				pos = transform.position;
-			} 
-			else {
-				transform.position = Vector3.MoveTowards (transform.position, pos, Time.deltaTime * speed); 
-			}
-		}
-		if(anim.GetCurrentAnimatorStateInfo(0).IsName("Walkingright") && transform.position == pos){
-			anim.Play ("Playeridleright");
-		}
-		if(anim.GetCurrentAnimatorStateInfo(0).IsName("Walkingleft") && transform.position == pos){
-			anim.Play ("Playeridleleft");
-		}
-		if(anim.GetCurrentAnimatorStateInfo(0).IsName("Walkingup") && transform.position == pos){
-			anim.Play ("Playeridleup");
-		}
-		if(anim.GetCurrentAnimatorStateInfo(0).IsName("Walkingdown") && transform.position == pos){
-			anim.Play ("Playeridledown");
-		}
-		if (anim.GetCurrentAnimatorStateInfo (0).IsName ("Playeridleright") || anim.GetCurrentAnimatorStateInfo (0).IsName ("Playeridleleft") || anim.GetCurrentAnimatorStateInfo (0).IsName ("Walkingright") || anim.GetCurrentAnimatorStateInfo (0).IsName ("Walkingleft")) {
-			if (ishorizontal == true) {
-				rot.z = 90;
-				dummyObject.transform.rotation = Quaternion.Euler (rot);
-				ishorizontal = false;
-			}
-		}
-		if (anim.GetCurrentAnimatorStateInfo (0).IsName ("Playeridledown") || anim.GetCurrentAnimatorStateInfo (0).IsName ("Playeridleup") || anim.GetCurrentAnimatorStateInfo (0).IsName ("Walkingdown") || anim.GetCurrentAnimatorStateInfo (0).IsName ("Walkingup")) {
-			if (ishorizontal == false) {
-				rot.z = 0;
-				dummyObject.transform.rotation = Quaternion.Euler (rot);
-				ishorizontal = true;
-			}
-		}
-
 	}
-	void DashAndMash(){
-		enemyAI.Stun ();
-	}
-	//void 
-	void spellhotkeys (){
-		if (Input.GetKeyDown(KeyCode.Alpha1)){
-			spells.FireBeam3by3();
+	void PlayerAutoattack(){
+		if (enemyhealthscript.curhp <= 0) {
+			GameObject frame = GameObject.FindGameObjectWithTag ("Selected_Frame");
+			Destroy (frame);	
+			Debug.Log ("DESTROY");
+			selectedenemy = null;
+			aggro = false;
 		}
-		if (Input.GetKeyDown(KeyCode.Alpha2)) {
-			//			spells.drawcircle (0, 0, 15);	
-			FireDash();
+		targetx = selectedenemy.transform.position.x;  //All this to measure the block and then run against attackDistance
+		targety = selectedenemy.transform.position.y;
+		myx = transform.position.x;
+		myy = transform.position.y;
+		ydif = Mathf.Abs(myy - targety);
+		xdif = Mathf.Abs(myx - targetx);
+		xydif = ydif+xdif;
+		if (AutoAttackCurTime < AutoAttackCooldown) {
+			AutoAttackCurTime += Time.deltaTime;
+		} 
+		else if(xydif <= attackDistance){
+			enemyhealthscript.ReceiveDamage (10);
+			AutoAttackCurTime = 0;
+			//Debug.Log ("pew");
+			//Debug.Log(xydif);
 		}
-		if (Input.GetKeyDown(KeyCode.Alpha3)) {
-			FireWings ();
-		}		
-		if (Input.GetKeyDown(KeyCode.Alpha4)) {
-			//spells.DrawFilledCircle (0,0,2);
-			DashAndMash ();
-		}
-	}
-	void CheckIsTaken(){
-		rayOrigin = pos;
-		rayOrigin += Vector3.back;
-		rayDirection = pos;
-		Ray ray = new Ray (rayOrigin, rayDirection);
-		RaycastHit hit;
-		Debug.Log(pos);
-
-		//Ray ray = pos;		RaycastHit hit;
-		if (Physics.Raycast (ray, 2)) {
-			Debug.Log(pos);
-			//Debug.Log(hit);
-		}
-	}
-	void FindTileTag(){
-		Collider[] colliders = Physics.OverlapSphere(pos, .1f); ///Presuming the object you are testing also has a collider 0 otherwise{
-			foreach(Collider component in colliders){
-			if (component.tag == "Ground") {
-				//Debug.Log (component.tag);
-				tileobject = component.gameObject;
-				tilescript = tileobject.GetComponent<TileHandler> ();
-				istiletaken = tilescript.isTaken;
-				//Debug.Log (tilescript.isTaken);
-			}
-
+		else{
 		}
 	}
 }

@@ -37,7 +37,7 @@ public class EnemyAI : MonoBehaviour {
 	bool inrangedi;
 	public bool cancheck;//direciton inticator for left-right, up-down
 	public bool isdead;
-	TileHandler tilescript;
+	public TileHandler tilescript;
 	GameObject tileobject;
 	bool istiletaken;
 	bool canfollowretrig;
@@ -151,6 +151,8 @@ public class EnemyAI : MonoBehaviour {
 				} 
 				else {
 					transform.position = Vector3.MoveTowards (transform.position, movedirection, Time.deltaTime * movespeed); 
+					tilescript.isTaken = true;
+
 				}
 				if (movedirection == transform.position) {
 					moving = false;

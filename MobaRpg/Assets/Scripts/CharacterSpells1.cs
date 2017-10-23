@@ -24,7 +24,7 @@ public class CharacterSpells1 : MonoBehaviour {
 	void Update () {
 		
 	}
-	public void FireBeam3by3 () {
+	void FireBeam3by3 () {
 		for (int y = 0; y < 3; y++) {
 			for (int x = 0; x < 3; x++) {
 				pos = transform.position;
@@ -54,15 +54,6 @@ public class CharacterSpells1 : MonoBehaviour {
 				}
 			}
 		}
-		/*if (anim.GetCurrentAnimatorStateInfo (0).IsName ("Playeridleright")) {           //Dos de adelante
-			GameObject cube = (GameObject)Instantiate(Resources.Load("Fire Prefab"));
-			//cube.AddComponent<Rigidbody>();
-			cube.transform.position = new Vector3 (pos.x + 1, pos.y, 0);
-			GameObject cube2 = (GameObject)Instantiate(Resources.Load("Fire Prefab"));
-			cube2.transform.position = new Vector3 (pos.x + 2, pos.y, 0);
-			Destroy (cube, explosionTime);
-			Destroy (cube2, explosionTime);
-		}*/
 	}
 	/*public void FireWings (){
 		dummyObject = new GameObject("Dummy Object");
