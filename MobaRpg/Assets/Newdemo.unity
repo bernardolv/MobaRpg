@@ -177,6 +177,10 @@ Prefab:
       propertyPath: m_Name
       value: Blue Flame (21)
       objectReference: {fileID: 0}
+    - target: {fileID: 1544986938220922, guid: 9e318de17bc3d4534980672e70044759, type: 2}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9e318de17bc3d4534980672e70044759, type: 2}
   m_IsPrefabParent: 0
@@ -227,6 +231,16 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 65245659641139306, guid: 205c4a129f3414c45931c041fa55124f,
+        type: 2}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 65245659641139306, guid: 205c4a129f3414c45931c041fa55124f,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 205c4a129f3414c45931c041fa55124f, type: 2}
   m_IsPrefabParent: 0
@@ -242,7 +256,7 @@ GameObject:
   - component: {fileID: 207556982}
   - component: {fileID: 207556981}
   - component: {fileID: 207556980}
-  m_Layer: 5
+  m_Layer: 2
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -578,6 +592,10 @@ Prefab:
       propertyPath: m_Name
       value: Blue Flame (16)
       objectReference: {fileID: 0}
+    - target: {fileID: 1544986938220922, guid: 9e318de17bc3d4534980672e70044759, type: 2}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9e318de17bc3d4534980672e70044759, type: 2}
   m_IsPrefabParent: 0
@@ -623,6 +641,10 @@ Prefab:
     - target: {fileID: 1544986938220922, guid: 9e318de17bc3d4534980672e70044759, type: 2}
       propertyPath: m_Name
       value: Blue Flame (18)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1544986938220922, guid: 9e318de17bc3d4534980672e70044759, type: 2}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9e318de17bc3d4534980672e70044759, type: 2}
@@ -692,6 +714,10 @@ Prefab:
       propertyPath: m_Name
       value: Blue Flame (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1544986938220922, guid: 9e318de17bc3d4534980672e70044759, type: 2}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9e318de17bc3d4534980672e70044759, type: 2}
   m_IsPrefabParent: 0
@@ -703,7 +729,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 362067100}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: BlueFlameHolder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -789,6 +815,10 @@ Prefab:
     - target: {fileID: 1544986938220922, guid: 9e318de17bc3d4534980672e70044759, type: 2}
       propertyPath: m_Name
       value: Blue Flame (15)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1544986938220922, guid: 9e318de17bc3d4534980672e70044759, type: 2}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9e318de17bc3d4534980672e70044759, type: 2}
@@ -902,6 +932,10 @@ Prefab:
       propertyPath: m_Name
       value: Blue Flame (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 1544986938220922, guid: 9e318de17bc3d4534980672e70044759, type: 2}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9e318de17bc3d4534980672e70044759, type: 2}
   m_IsPrefabParent: 0
@@ -947,6 +981,10 @@ Prefab:
     - target: {fileID: 1544986938220922, guid: 9e318de17bc3d4534980672e70044759, type: 2}
       propertyPath: m_Name
       value: Blue Flame (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1544986938220922, guid: 9e318de17bc3d4534980672e70044759, type: 2}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9e318de17bc3d4534980672e70044759, type: 2}
@@ -1016,6 +1054,10 @@ Prefab:
       propertyPath: m_Name
       value: Blue Flame (20)
       objectReference: {fileID: 0}
+    - target: {fileID: 1544986938220922, guid: 9e318de17bc3d4534980672e70044759, type: 2}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9e318de17bc3d4534980672e70044759, type: 2}
   m_IsPrefabParent: 0
@@ -1031,7 +1073,7 @@ GameObject:
   - component: {fileID: 702196573}
   - component: {fileID: 702196572}
   - component: {fileID: 702196571}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -1122,7 +1164,8 @@ GameObject:
   - component: {fileID: 833881284}
   - component: {fileID: 833881285}
   - component: {fileID: 833881282}
-  m_Layer: 0
+  - component: {fileID: 833881286}
+  m_Layer: 2
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1201,6 +1244,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d74ee36cbd91d480794435f3f76143dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pos: {x: 0, y: 0, z: 0}
   speed: 4
   wingsTime: 3
   AutoAttackCooldown: 3
@@ -1238,8 +1282,10 @@ MonoBehaviour:
   explosionTime: 0.4
   wingsTime: 3
   Player: {fileID: 0}
-  dummyObject: {fileID: 0}
   ishorizontal: 0
+  AoeDotObject: {fileID: 0}
+  MousePosX: 0
+  MousePosY: 0
 --- !u!114 &833881283
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1265,7 +1311,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.5, y: 0.5, z: 0.2}
+  m_Size: {x: 1, y: 1, z: 0.2}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &833881285
 Rigidbody:
@@ -1282,6 +1328,17 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &833881286
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 833881277}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a39d573a52c7b4500bfeae8bef79517e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &868140222 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1544986938220922, guid: 9e318de17bc3d4534980672e70044759,
@@ -1353,6 +1410,46 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &901383049
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 901383051}
+  - component: {fileID: 901383050}
+  m_Layer: 0
+  m_Name: Mouse
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &901383050
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 901383049}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e202143cbe14446a78e91e63c894dcb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &901383051
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 901383049}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.288339, y: -5.6664867, z: 8.55758}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &915090552 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1544986938220922, guid: 9e318de17bc3d4534980672e70044759,
@@ -1418,6 +1515,10 @@ Prefab:
       propertyPath: m_Name
       value: Blue Flame (12)
       objectReference: {fileID: 0}
+    - target: {fileID: 1544986938220922, guid: 9e318de17bc3d4534980672e70044759, type: 2}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9e318de17bc3d4534980672e70044759, type: 2}
   m_IsPrefabParent: 0
@@ -1432,7 +1533,7 @@ GameObject:
   - component: {fileID: 931893739}
   - component: {fileID: 931893738}
   - component: {fileID: 931893737}
-  m_Layer: 5
+  m_Layer: 2
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1558,6 +1659,10 @@ Prefab:
       propertyPath: m_Name
       value: Blue Flame (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 1544986938220922, guid: 9e318de17bc3d4534980672e70044759, type: 2}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9e318de17bc3d4534980672e70044759, type: 2}
   m_IsPrefabParent: 0
@@ -1603,6 +1708,10 @@ Prefab:
     - target: {fileID: 1544986938220922, guid: 9e318de17bc3d4534980672e70044759, type: 2}
       propertyPath: m_Name
       value: Blue Flame (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1544986938220922, guid: 9e318de17bc3d4534980672e70044759, type: 2}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9e318de17bc3d4534980672e70044759, type: 2}
@@ -1671,6 +1780,10 @@ Prefab:
     - target: {fileID: 1544986938220922, guid: 9e318de17bc3d4534980672e70044759, type: 2}
       propertyPath: m_Name
       value: Blue Flame (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1544986938220922, guid: 9e318de17bc3d4534980672e70044759, type: 2}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9e318de17bc3d4534980672e70044759, type: 2}
@@ -1759,6 +1872,10 @@ Prefab:
     - target: {fileID: 1544986938220922, guid: 9e318de17bc3d4534980672e70044759, type: 2}
       propertyPath: m_Name
       value: Blue Flame (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1544986938220922, guid: 9e318de17bc3d4534980672e70044759, type: 2}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9e318de17bc3d4534980672e70044759, type: 2}
@@ -2009,6 +2126,10 @@ Prefab:
       propertyPath: m_Name
       value: Blue Flame (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 1544986938220922, guid: 9e318de17bc3d4534980672e70044759, type: 2}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9e318de17bc3d4534980672e70044759, type: 2}
   m_IsPrefabParent: 0
@@ -2054,6 +2175,10 @@ Prefab:
     - target: {fileID: 1544986938220922, guid: 9e318de17bc3d4534980672e70044759, type: 2}
       propertyPath: m_Name
       value: Blue Flame (19)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1544986938220922, guid: 9e318de17bc3d4534980672e70044759, type: 2}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9e318de17bc3d4534980672e70044759, type: 2}
@@ -2145,6 +2270,10 @@ Prefab:
       propertyPath: m_Name
       value: Blue Flame
       objectReference: {fileID: 0}
+    - target: {fileID: 1544986938220922, guid: 9e318de17bc3d4534980672e70044759, type: 2}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9e318de17bc3d4534980672e70044759, type: 2}
   m_IsPrefabParent: 0
@@ -2213,6 +2342,10 @@ Prefab:
       propertyPath: m_Name
       value: Blue Flame (11)
       objectReference: {fileID: 0}
+    - target: {fileID: 1544986938220922, guid: 9e318de17bc3d4534980672e70044759, type: 2}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9e318de17bc3d4534980672e70044759, type: 2}
   m_IsPrefabParent: 0
@@ -2249,7 +2382,7 @@ GameObject:
   - component: {fileID: 1262797986}
   - component: {fileID: 1262797985}
   - component: {fileID: 1262797984}
-  m_Layer: 5
+  m_Layer: 2
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2361,7 +2494,7 @@ GameObject:
   - component: {fileID: 1370543068}
   - component: {fileID: 1370543067}
   - component: {fileID: 1370543066}
-  m_Layer: 5
+  m_Layer: 2
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2486,6 +2619,10 @@ Prefab:
       propertyPath: m_Name
       value: Blue Flame (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 1544986938220922, guid: 9e318de17bc3d4534980672e70044759, type: 2}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9e318de17bc3d4534980672e70044759, type: 2}
   m_IsPrefabParent: 0
@@ -2531,6 +2668,10 @@ Prefab:
     - target: {fileID: 1544986938220922, guid: 9e318de17bc3d4534980672e70044759, type: 2}
       propertyPath: m_Name
       value: Blue Flame (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1544986938220922, guid: 9e318de17bc3d4534980672e70044759, type: 2}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9e318de17bc3d4534980672e70044759, type: 2}
@@ -2605,6 +2746,10 @@ Prefab:
       propertyPath: m_Name
       value: Blue Flame (17)
       objectReference: {fileID: 0}
+    - target: {fileID: 1544986938220922, guid: 9e318de17bc3d4534980672e70044759, type: 2}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9e318de17bc3d4534980672e70044759, type: 2}
   m_IsPrefabParent: 0
@@ -2672,6 +2817,10 @@ Prefab:
     - target: {fileID: 1544986938220922, guid: 9e318de17bc3d4534980672e70044759, type: 2}
       propertyPath: m_Name
       value: Blue Flame (22)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1544986938220922, guid: 9e318de17bc3d4534980672e70044759, type: 2}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9e318de17bc3d4534980672e70044759, type: 2}
@@ -3212,6 +3361,10 @@ Prefab:
       propertyPath: m_Name
       value: Blue Flame (23)
       objectReference: {fileID: 0}
+    - target: {fileID: 1544986938220922, guid: 9e318de17bc3d4534980672e70044759, type: 2}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9e318de17bc3d4534980672e70044759, type: 2}
   m_IsPrefabParent: 0
@@ -3384,6 +3537,10 @@ Prefab:
       propertyPath: m_Name
       value: Blue Flame (14)
       objectReference: {fileID: 0}
+    - target: {fileID: 1544986938220922, guid: 9e318de17bc3d4534980672e70044759, type: 2}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9e318de17bc3d4534980672e70044759, type: 2}
   m_IsPrefabParent: 0
@@ -3429,6 +3586,10 @@ Prefab:
     - target: {fileID: 1544986938220922, guid: 9e318de17bc3d4534980672e70044759, type: 2}
       propertyPath: m_Name
       value: Blue Flame (13)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1544986938220922, guid: 9e318de17bc3d4534980672e70044759, type: 2}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9e318de17bc3d4534980672e70044759, type: 2}

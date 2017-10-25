@@ -54,6 +54,8 @@
      <Compile Include="Assets\EnemyAI.cs" />
      <Compile Include="Assets\FireFieldScript.cs" />
      <Compile Include="Assets\FireMageDude.cs" />
+     <Compile Include="Assets\LizardDude.cs" />
+     <Compile Include="Assets\MouseTilePos.cs" />
      <Compile Include="Assets\PlayerHealth.cs" />
      <Compile Include="Assets\Scripts\CharacterMovement.cs" />
      <Compile Include="Assets\Scripts\CharacterSpells1.cs" />

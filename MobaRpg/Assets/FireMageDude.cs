@@ -18,7 +18,11 @@ public class FireMageDude : MonoBehaviour {
 	TileHandler tilescript;
 	GameObject tileobject;
 	bool istiletaken;
+	bool doingdot;
 	//public Vector3 dadpos;
+	public GameObject AoeDotObject; 
+	public float MousePosX;
+	public float MousePosY;
 
 	void Start () {
 		anim = GetComponent<Animator> ();
@@ -32,6 +36,8 @@ public class FireMageDude : MonoBehaviour {
 		dummyObject.transform.parent = Player.transform;
 		dummyObject.transform.position = pos;
 		//dadpos = Playermovement.pos;
+		doingdot = false;
+		AoeDotObject = null;
 	}
 	
 	// Update is called once per frame
@@ -39,6 +45,14 @@ public class FireMageDude : MonoBehaviour {
 		pos = Playermovement.pos;
 		spellhotkeys ();
 		DummyObjectRotation ();
+
+		if (doingdot == true) {
+			AoeDotObject.transform.position = MouseTilePos.grassTile.transform.position;
+
+			//AoeDotObject.transform.position.x = MouseTilePos.mouseTilePosX;
+			//AoeDotObject.transform.position.y = MouseTilePos.mouseTilePosY;
+		}
+
 	}
 	void DummyObjectRotation(){
 		if (anim.GetCurrentAnimatorStateInfo (0).IsName ("Playeridleright") || anim.GetCurrentAnimatorStateInfo (0).IsName ("Playeridleleft") || anim.GetCurrentAnimatorStateInfo (0).IsName ("Walkingright") || anim.GetCurrentAnimatorStateInfo (0).IsName ("Walkingleft")) {
@@ -58,11 +72,12 @@ public class FireMageDude : MonoBehaviour {
 	}
 	void spellhotkeys (){
 		if (Input.GetKeyDown (KeyCode.Alpha1)) {
-			FireBeam3by3 ();
-			Debug.Log ("A");
+			//FireBeam3by3 ();
+			//Debug.Log ("A");
+			AoeStackingDot();
 		}
 		if (Input.GetKeyDown (KeyCode.Alpha2)) {
-			FireDash ();
+			Playermovement.GFireDash ();
 		}
 		if (Input.GetKeyDown (KeyCode.Alpha3)) {
 			FireWings ();
@@ -145,39 +160,60 @@ public class FireMageDude : MonoBehaviour {
 			}
 		}	
 	} 
-	void FireDash(){
+	/*void FireDash(){
 		if (anim.GetCurrentAnimatorStateInfo (0).IsName ("Playeridleright")) {
 			pos += 2*Vector3.left;
+			Playermovement.pos += 2*Vector3.left;
+
 			pos2 = pos - Vector3.left;
 		}
 		if (anim.GetCurrentAnimatorStateInfo (0).IsName ("Playeridleleft")) {
 			pos += 2*Vector3.right;
+			Playermovement.pos += 2*Vector3.right;
+
 			pos2 = pos - Vector3.right;
 		}
 		if (anim.GetCurrentAnimatorStateInfo (0).IsName ("Playeridleup")) {
 			pos += 2*Vector3.down;
+			Playermovement.pos += 2*Vector3.down;
+
 			pos2 = pos - Vector3.down;
 		}
 		if (anim.GetCurrentAnimatorStateInfo (0).IsName ("Playeridledown")) {
 			pos += 2*Vector3.up;
+			Playermovement.pos += 2*Vector3.up;
+
 			pos2 = pos - Vector3.up;
 		}
 		FindTileTag ();
 		if (istiletaken == true) {
 			pos = pos2;
 			FindTileTag();
+			Debug.Log ("1");
 			if (istiletaken == true) {
 				pos = transform.position;
+				Debug.Log ("2");
+
 			}
 			else {
 				tilescript.isTaken = true;
 				transform.position = Vector3.MoveTowards (transform.position, pos, Time.deltaTime * speed); 
+				Debug.Log ("3");
+
 			}
 		} 
 		else {
 			tilescript.isTaken = true;
 			transform.position = Vector3.MoveTowards (transform.position, pos, Time.deltaTime * speed); 
-		}
-	}
+			Debug.Log ("4");
 
+		}
+	}*/
+	void AoeStackingDot(){
+		AoeDotObject = (GameObject)Instantiate (Resources.Load ("Selected_Frame"));
+		//MousePosX = MouseTilePos.mouseTilePosX;
+	//	MousePosY = MouseTilePos.mouseTilePosY;
+		AoeDotObject.transform.position = MouseTilePos.grassTile.transform.position;
+		doingdot = true;
+	}
 }

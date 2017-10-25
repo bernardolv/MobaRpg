@@ -64,7 +64,7 @@ public class CharacterMovement : MonoBehaviour {
 		if (selectedenemy != null){
 			PlayerAutoattack ();
 		}
-//		spellhotkeys ();
+		spellhotkeys ();
 	}
 	void RayCaster (){
 		//Debug.Log (Vector3.down);
@@ -135,7 +135,7 @@ public class CharacterMovement : MonoBehaviour {
 			}
 		}	
 	} */
-	/*void FireDash(){
+	public void GFireDash(){
 		if (anim.GetCurrentAnimatorStateInfo (0).IsName ("Playeridleright")) {
 			pos += 2*Vector3.left;
 			pos2 = pos - Vector3.left;
@@ -168,21 +168,21 @@ public class CharacterMovement : MonoBehaviour {
 			tilescript.isTaken = true;
 			transform.position = Vector3.MoveTowards (transform.position, pos, Time.deltaTime * speed); 
 		}
-	}*/
-	/*void spellhotkeys (){
-		if (Input.GetKeyDown(KeyCode.Alpha1)){
-		FireBeam3by3();
 	}
+	void spellhotkeys (){
+		//if (Input.GetKeyDown(KeyCode.Alpha1)){
+	//	FireBeam3by3();
+		//}
 	if (Input.GetKeyDown(KeyCode.Alpha2)) {
-		FireDash();
+		//FireDash();
 	}
 	if (Input.GetKeyDown(KeyCode.Alpha3)) {
-		FireWings ();
+		//FireWings ();
 	}		
 	if (Input.GetKeyDown(KeyCode.Alpha4)) {
-		DashAndMash ();
+		//DashAndMash ();
 	}
-	}*/
+	}
 	void Movement(){
 		QwertyMovement ();
 		if (pos != transform.position) {

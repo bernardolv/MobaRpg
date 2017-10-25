@@ -1,11 +1,14 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj" VersionControlDisabled="True">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/CharacterMovement.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/FireMageDude.cs">
     <Files>
-      <File FileName="Assets/EnemyAI.cs" Line="46" Column="17" />
-      <File FileName="Assets/Scripts/CharacterMovement.cs" Line="28" Column="16" />
-      <File FileName="Assets/FireMageDude.cs" Line="22" Column="2" />
-      <File FileName="Assets/Scripts/CharacterSpells1.cs" Line="17" Column="36" />
+      <File FileName="Assets/MouseTilePos.cs" Line="22" Column="53" />
+      <File FileName="Assets/LizardDude.cs" Line="1" Column="1" />
+      <File FileName="Assets/EnemyAI.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/CharacterMovement.cs" Line="151" Column="72" />
+      <File FileName="Assets/FireMageDude.cs" Line="216" Column="33" />
+      <File FileName="Assets/Scripts/CharacterSpells1.cs" Line="1" Column="1" />
+      <File FileName="Assets/TileHandler.cs" Line="36" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

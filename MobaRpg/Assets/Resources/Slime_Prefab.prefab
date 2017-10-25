@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 222525161131772782}
   - component: {fileID: 114453106939198112}
   - component: {fileID: 114872810641381876}
-  m_Layer: 5
+  m_Layer: 2
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   - component: {fileID: 223059493998046154}
   - component: {fileID: 114262194283357720}
   - component: {fileID: 114664657232486846}
-  m_Layer: 5
+  m_Layer: 2
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -62,7 +62,7 @@ GameObject:
   - component: {fileID: 222251720208231552}
   - component: {fileID: 54860026736188722}
   - component: {fileID: 114142321602578248}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Slime_Prefab
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -144,6 +144,7 @@ MonoBehaviour:
   canmovecounter: 0
   cancheck: 0
   isdead: 0
+  tilescript: {fileID: 0}
 --- !u!114 &114262194283357720
 MonoBehaviour:
   m_ObjectHideFlags: 1

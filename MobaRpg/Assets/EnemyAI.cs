@@ -53,6 +53,7 @@ public class EnemyAI : MonoBehaviour {
 		canmovecounter = 0;
 		//inrange = false;
 		isdead = false;
+		FindTileTag ();
 	}
 	
 	// Update is called once per frame
@@ -70,18 +71,6 @@ public class EnemyAI : MonoBehaviour {
 		Debug.Log ("Je suis stunned");
 		}
 	void Checkrange(){
-		/*if (xydif <= attackdistance) {
-			inrange = true;
-		}
-		if (xydif == attackdistance + 1) {
-			if (xdif == ydif) {
-				inrange = true;
-				//Debug.Log ("endiagonal");
-			}
-		}
-		if (xydif {
-			inrange = false;
-		*/
 		if (xydif <= attackdistance+1 && xdif <= 1 && ydif <= 1) {
 			//Debug.Log ("enrango");
 			inrange = true;
@@ -184,21 +173,29 @@ public class EnemyAI : MonoBehaviour {
 					//north
 					movedirection += Vector3.up;
 					moving = true;
+					FindTileTag ();
+
 				}
 				if (rng == 1 && canmove==true) {
 					//east
 					movedirection += Vector3.right;
 					moving = true;
+					FindTileTag ();
+
 				}
 				if (rng == 2 && canmove == true) {
 					//south
 					movedirection += Vector3.down;
 					moving = true;
+					FindTileTag ();
+
 				}
 				if (rng == 3 && canmove == true) {
 					//west
 					movedirection += Vector3.left;
 					moving = true;
+					FindTileTag ();
+
 				}
 				timebetweenmovecounter = timebetweenmove;
 				//movedirection = new
@@ -236,6 +233,8 @@ public class EnemyAI : MonoBehaviour {
 						Debug.Log ("d");
 						inrangemove = false;
 						canmove = false;
+						FindTileTag ();
+
 
 					}
 					if (inrangedi == false) {
@@ -244,6 +243,7 @@ public class EnemyAI : MonoBehaviour {
 						Debug.Log ("a");
 						inrangemove = false;
 						canmove = false;
+						FindTileTag ();
 
 					}
 				}
@@ -255,6 +255,7 @@ public class EnemyAI : MonoBehaviour {
 						Debug.Log ("s");
 						inrangemove = false;
 						canmove = false;
+						FindTileTag ();
 
 					}
 					if (inrangedi == false) {
@@ -263,6 +264,8 @@ public class EnemyAI : MonoBehaviour {
 						Debug.Log ("w");
 						inrangemove = false;
 						canmove = false;
+						FindTileTag ();
+
 					}
 				}
 				if (xydif == 2) { //for diagonally standing cases
@@ -273,6 +276,8 @@ public class EnemyAI : MonoBehaviour {
 						moving = true;
 						inrangemove = false;
 						canmove = false;
+						FindTileTag ();
+
 					}
 					if(inrangedi == true && myx > targetx){
 							Debug.Log ("caso 2");
@@ -280,6 +285,8 @@ public class EnemyAI : MonoBehaviour {
 						moving = true;
 						inrangemove = false;
 						canmove = false;
+						FindTileTag ();
+
 					}
 					if(inrangedi == false && myy < targety){
 						Debug.Log ("caso 3");
@@ -287,6 +294,8 @@ public class EnemyAI : MonoBehaviour {
 						moving = true;
 						inrangemove = false;
 						canmove = false;
+						FindTileTag ();
+
 					}
 					if(inrangedi == false && myy > targety){
 						Debug.Log ("caso 3");
@@ -294,6 +303,8 @@ public class EnemyAI : MonoBehaviour {
 						moving = true;
 						inrangemove = false;
 						canmove = false;
+						FindTileTag ();
+
 					}
 				}
 			}
@@ -346,9 +357,4 @@ public class EnemyAI : MonoBehaviour {
 		CancelInvoke ();
 
 	}
-	/*void RandomTimer(){
-		float randomcounter = 0
-		
-		if(
-	}*/
 }
