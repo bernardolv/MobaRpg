@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CharacterMovement : MonoBehaviour {
 
-	public Vector3 pos;
+	public static Vector3 pos;
 	Vector3 pos2;
 	Vector3 rayDirection;
 	Vector3 rayOrigin;
@@ -35,6 +35,9 @@ public class CharacterMovement : MonoBehaviour {
 	GameObject tileobject;
 	bool istiletaken;
 	bool canmove;
+	public static bool otherscriptismoving;
+	public LayerMask pvpmouse;
+
 
 	void Start () {
 		//int animvalue;
@@ -42,15 +45,13 @@ public class CharacterMovement : MonoBehaviour {
 		//rot = transform.rotation.eulerAngles;
 		anim = GetComponent<Animator> ();
 		speed = 4;
-		//spells = GetComponent<CharacterSpells1> ();
-		//animvalue = 0;
 		Player = this.gameObject;
 		dummyObject = new GameObject("Dummy Object");
 		//rot = dummyObject.transform.rotation.eulerAngles;
 		dummyObject.transform.parent = Player.transform;
 		dummyObject.transform.position = pos;
 		aggro = false;
-
+		otherscriptismoving = false;
 	
 	}
 	void Update () {
@@ -70,7 +71,7 @@ public class CharacterMovement : MonoBehaviour {
 		//Debug.Log (Vector3.down);
 		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 		RaycastHit hit;
-		if(Physics.Raycast(ray, out hit,10)){
+		if(Physics.Raycast(ray, out hit,10, pvpmouse)){
 			if (hit.transform.tag == "Enemy") {
 				selectedenemy = hit.transform.gameObject;
 				Debug.Log ("You got an enemy biaaaatch and his name is " + selectedenemy.ToString()	);
@@ -160,13 +161,13 @@ public class CharacterMovement : MonoBehaviour {
 				pos = transform.position;
 			}
 			else {
-				tilescript.isTaken = true;
-				transform.position = Vector3.MoveTowards (transform.position, pos, Time.deltaTime * speed); 
+				//tilescript.isTaken = true;
+				//transform.position = Vector3.MoveTowards (transform.position, pos, Time.deltaTime * speed); 
 			}
 		} 
 		else {
-			tilescript.isTaken = true;
-			transform.position = Vector3.MoveTowards (transform.position, pos, Time.deltaTime * speed); 
+			//tilescript.isTaken = true;
+			//transform.position = Vector3.MoveTowards (transform.position, pos, Time.deltaTime * speed); 
 		}
 	}
 	void spellhotkeys (){
@@ -184,12 +185,15 @@ public class CharacterMovement : MonoBehaviour {
 	}
 	}
 	void Movement(){
-		QwertyMovement ();
-		if (pos != transform.position) {
-			MoveifnotTaken ();
-		}
-		ResetIdleAnimation ();
+		if(otherscriptismoving == false){
+			QwertyMovement ();
+
+			if (pos != transform.position) {
+				MoveifnotTaken ();
+			}
+			ResetIdleAnimation ();
 		//DummyObjectRotation ();
+				}
 	}
 	void DashAndMash(){
 		enemyAI.Stun ();
@@ -211,6 +215,7 @@ public class CharacterMovement : MonoBehaviour {
 		else {
 			tilescript.isTaken = true;
 			transform.position = Vector3.MoveTowards (transform.position, pos, Time.deltaTime * speed); 
+			//Debug.Log ("Okay");
 		}
 	}
 	void ResetIdleAnimation(){
@@ -226,6 +231,7 @@ public class CharacterMovement : MonoBehaviour {
 		if(anim.GetCurrentAnimatorStateInfo(0).IsName("Walkingdown") && transform.position == pos){
 			anim.Play ("Playeridledown");
 		}
+		//Debug.Log ("OK");
 	}
 	void QwertyMovement(){
 		if(Input.GetKey(KeyCode.A) && transform.position == pos) {        // Left

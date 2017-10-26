@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class FireMageDude : MonoBehaviour {
-	Vector3 pos;
+	public Vector3 pos;
 	Vector3 pos2;
 	public float speed;
 	private Animator anim;
@@ -23,6 +23,7 @@ public class FireMageDude : MonoBehaviour {
 	public GameObject AoeDotObject; 
 	public float MousePosX;
 	public float MousePosY;
+	bool moving;
 
 	void Start () {
 		anim = GetComponent<Animator> ();
@@ -38,21 +39,35 @@ public class FireMageDude : MonoBehaviour {
 		//dadpos = Playermovement.pos;
 		doingdot = false;
 		AoeDotObject = null;
+		moving = false;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		pos = Playermovement.pos;
-		spellhotkeys ();
-		DummyObjectRotation ();
+		if (moving == true) {
+			if (CharacterMovement.pos == transform.position) {
+				Debug.Log ("YOWZA");
+				moving = false;
+				CharacterMovement.otherscriptismoving = false;
+				//CharacterMovement.pos = pos;
+				//CharacterMovement.otherscriptismoving = false;
+			}
+			MoveifnotTaken ();
 
-		if (doingdot == true) {
-			AoeDotObject.transform.position = MouseTilePos.grassTile.transform.position;
+			Debug.Log ("Caso");
+		} 
+		else {
+			pos = transform.position;
+			spellhotkeys ();
+			DummyObjectRotation ();
 
-			//AoeDotObject.transform.position.x = MouseTilePos.mouseTilePosX;
-			//AoeDotObject.transform.position.y = MouseTilePos.mouseTilePosY;
+			if (doingdot == true) {
+				AoeDotObject.transform.position = MouseTilePos.grassTile.transform.position;
+
+				//AoeDotObject.transform.position.x = MouseTilePos.mouseTilePosX;
+				//AoeDotObject.transform.position.y = MouseTilePos.mouseTilePosY;
+			}
 		}
-
 	}
 	void DummyObjectRotation(){
 		if (anim.GetCurrentAnimatorStateInfo (0).IsName ("Playeridleright") || anim.GetCurrentAnimatorStateInfo (0).IsName ("Playeridleleft") || anim.GetCurrentAnimatorStateInfo (0).IsName ("Walkingright") || anim.GetCurrentAnimatorStateInfo (0).IsName ("Walkingleft")) {
@@ -77,13 +92,18 @@ public class FireMageDude : MonoBehaviour {
 			AoeStackingDot();
 		}
 		if (Input.GetKeyDown (KeyCode.Alpha2)) {
-			Playermovement.GFireDash ();
+			if (CharacterMovement.pos == transform.position) {
+				Debug.Log("A");
+				FireDash();
+			}
 		}
 		if (Input.GetKeyDown (KeyCode.Alpha3)) {
 			FireWings ();
 		}		
 		if (Input.GetKeyDown (KeyCode.Alpha4)) {
 			//DashAndMash ();
+			CharacterMovement.otherscriptismoving = true;
+
 		}
 	}
 	void FindTileTag(){
@@ -145,7 +165,7 @@ public class FireMageDude : MonoBehaviour {
 				cubedown.transform.parent = dummyObject.transform;
 				ishorizontal = false;
 			}
-			if (anim.GetCurrentAnimatorStateInfo (0).IsName ("Playeridleup") || anim.GetCurrentAnimatorStateInfo (0).IsName ("Playeridledown")) {
+			if ((anim.GetCurrentAnimatorStateInfo (0).IsName ("Playeridleup") || anim.GetCurrentAnimatorStateInfo (0).IsName ("Playeridledown")) && transform.position == pos) {
 				GameObject cubeup = (GameObject)Instantiate(Resources.Load("Fire Prefab"));
 				//cube.AddComponent<Rigidbody>();
 				cubeup.transform.position = new Vector3 (pos.x + y, pos.y, 0);
@@ -160,29 +180,24 @@ public class FireMageDude : MonoBehaviour {
 			}
 		}	
 	} 
-	/*void FireDash(){
+	void FireDash(){
+		CharacterMovement.otherscriptismoving = true;
+		pos = CharacterMovement.pos;
+		moving = true;
 		if (anim.GetCurrentAnimatorStateInfo (0).IsName ("Playeridleright")) {
 			pos += 2*Vector3.left;
-			Playermovement.pos += 2*Vector3.left;
-
 			pos2 = pos - Vector3.left;
 		}
 		if (anim.GetCurrentAnimatorStateInfo (0).IsName ("Playeridleleft")) {
 			pos += 2*Vector3.right;
-			Playermovement.pos += 2*Vector3.right;
-
 			pos2 = pos - Vector3.right;
 		}
 		if (anim.GetCurrentAnimatorStateInfo (0).IsName ("Playeridleup")) {
 			pos += 2*Vector3.down;
-			Playermovement.pos += 2*Vector3.down;
-
 			pos2 = pos - Vector3.down;
 		}
 		if (anim.GetCurrentAnimatorStateInfo (0).IsName ("Playeridledown")) {
 			pos += 2*Vector3.up;
-			Playermovement.pos += 2*Vector3.up;
-
 			pos2 = pos - Vector3.up;
 		}
 		FindTileTag ();
@@ -192,28 +207,39 @@ public class FireMageDude : MonoBehaviour {
 			Debug.Log ("1");
 			if (istiletaken == true) {
 				pos = transform.position;
-				Debug.Log ("2");
+				//Debug.Log ("2");
 
 			}
 			else {
-				tilescript.isTaken = true;
-				transform.position = Vector3.MoveTowards (transform.position, pos, Time.deltaTime * speed); 
-				Debug.Log ("3");
+				//tilescript.isTaken = true;
+				//transform.position = Vector3.MoveTowards (transform.position, pos, Time.deltaTime * speed); 
+				//Debug.Log ("3");
 
 			}
+			//Debug.Log ("HI");
 		} 
 		else {
-			tilescript.isTaken = true;
-			transform.position = Vector3.MoveTowards (transform.position, pos, Time.deltaTime * speed); 
-			Debug.Log ("4");
+			//tilescript.isTaken = true;
+			//transform.position = Vector3.MoveTowards (transform.position, pos, Time.deltaTime * speed); 
+			//Debug.Log ("4");
 
 		}
-	}*/
+		CharacterMovement.pos = pos;
+	}
 	void AoeStackingDot(){
 		AoeDotObject = (GameObject)Instantiate (Resources.Load ("Selected_Frame"));
 		//MousePosX = MouseTilePos.mouseTilePosX;
 	//	MousePosY = MouseTilePos.mouseTilePosY;
 		AoeDotObject.transform.position = MouseTilePos.grassTile.transform.position;
 		doingdot = true;
+	}
+	void MoveifnotTaken(){
+		if (istiletaken == true) {
+			pos = transform.position;
+		} else {
+			tilescript.isTaken = true;
+			transform.position = Vector3.MoveTowards (transform.position, pos, Time.deltaTime * speed); 
+			//Debug.Log ("Okay");
+		}
 	}
 }

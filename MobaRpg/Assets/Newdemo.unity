@@ -1244,12 +1244,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d74ee36cbd91d480794435f3f76143dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pos: {x: 0, y: 0, z: 0}
   speed: 4
   wingsTime: 3
   AutoAttackCooldown: 3
   AutoAttackCurTime: 3
   attackDistance: 4
+  pvpmouse:
+    serializedVersion: 2
+    m_Bits: 4
 --- !u!95 &833881281
 Animator:
   serializedVersion: 3
@@ -1278,6 +1280,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee776d9a39aae4996ba075df429d30e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pos: {x: 0, y: 0, z: 0}
   speed: 0
   explosionTime: 0.4
   wingsTime: 3
